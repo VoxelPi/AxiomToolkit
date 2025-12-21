@@ -2,7 +2,7 @@
 clikt = "5.0.3"
 cloud-command = "2.0.0"
 jline = "3.30.5"
-jserialcomm = "2.11.2"
+jserialcomm = "2.11.4"
 junit = "5.13.4"
 kotlin = "2.2.20"
 kotlin-logging = "7.0.13"

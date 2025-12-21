@@ -151,7 +151,7 @@ class BridgeUploadCommand(
         }
 
         val bridgeInfo = runBlocking {
-            withTimeout(1000) {
+            withTimeout(10000) {
                 bridge.fetchInfo().getOrElse { exception ->
                     echo("${TextColors.brightRed(TextStyles.bold("ERROR"))} ${TextColors.brightRed("Unable to connect to bridge at port $port. Please make sure the bridge is connected at the specified port. ${exception.message}")}", err = true)
                     exitProcess(1)
@@ -163,7 +163,7 @@ class BridgeUploadCommand(
         echo("Uploading \"${programFile.normalize().absolutePathString()}\"")
         val uploadTime = measureTime {
             runBlocking {
-                withTimeout(1000) {
+                withTimeout(10000) {
                     bridge.uploadProgram(programFile.readBytes()).getOrElse { exception ->
                         echo("${TextColors.brightRed(TextStyles.bold("ERROR"))} Failed to upload the program. ${exception.message}")
                         exitProcess(1)
@@ -172,6 +172,7 @@ class BridgeUploadCommand(
             }
         }
         echo("${TextColors.brightGreen("Verify complete")} (${String.format("%.3f", uploadTime.inWholeMilliseconds / 1000.0)}s)")
+        exitProcess(0)
     }
 }
 

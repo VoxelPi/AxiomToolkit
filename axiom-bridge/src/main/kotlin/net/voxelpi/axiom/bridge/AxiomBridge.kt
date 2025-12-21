@@ -8,7 +8,7 @@ public object AxiomBridge {
     /**
      * Connects to the bridge at the specified [portDescriptor] with the given [baudRate].
      */
-    public fun connect(portDescriptor: String, baudRate: Int, architecture: Architecture): Result<AxiomBridgeConnection> {
+    public fun connect(portDescriptor: String, baudRate: Int, architecture: Architecture): Result<AxiomBridgeLink> {
         val port = SerialPort.getCommPort(portDescriptor)
         port.setComPortParameters(
             baudRate,
@@ -23,6 +23,7 @@ public object AxiomBridge {
             }
         }
 
-        return Result.success(AxiomBridgeConnection(architecture, port))
+        val connection = AxiomBridgeConnection(port)
+        return Result.success(AxiomBridgeLink(architecture, connection))
     }
 }
