@@ -41,23 +41,16 @@ application {
     mainClass.set("net.voxelpi.axiom.cli.MainKt")
 }
 
-// See https://docs.gradle.org/8.12/userguide/configuration_cache.html#config_cache:requirements:use_project_during_execution
-interface Injected {
-    @get:Inject val fs: FileSystemOperations
-}
-
 tasks {
     shadowJar {
+        archiveClassifier = ""
         transform(Log4j2PluginsCacheFileTransformer::class.java)
 
-        val injected = project.objects.newInstance<Injected>()
-        doLast {
-            injected.fs.copy {
-                from(outputs.files.singleFile)
-                into(rootProject.layout.buildDirectory.dir("libs"))
-
-                rename { "axiom-cli-${version}.jar" }
-            }
+        manifest {
+            attributes(
+                "Main-Class" to "net.voxelpi.axiom.cli.MainKt",
+                "Multi-Release" to true
+            )
         }
     }
 
@@ -66,11 +59,7 @@ tasks {
     }
 
     jar {
-        manifest {
-            attributes(
-                "Main-Class" to "net.voxelpi.axiom.cli.MainKt",
-                "Multi-Release" to true
-            )
-        }
+        archiveClassifier = "thin"
+        enabled = false
     }
 }
