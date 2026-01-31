@@ -20,8 +20,8 @@ sourceSets {
         blossom {
             kotlinSources {
                 property("version", project.version.toString())
-                property("git_commit", indraGit.commit()?.name ?: "<none>")
-                property("git_branch", indraGit.branchName() ?: "<none>")
+                property("git_commit", indraGit.commit().get().name ?: "<none>")
+                property("git_branch", indraGit.branchName().get())
             }
         }
     }

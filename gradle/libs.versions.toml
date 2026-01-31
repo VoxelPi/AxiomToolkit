@@ -12,11 +12,11 @@ log4j = "2.25.1"
 slf4j = "1.7.36"
 
 # Plugins
-blossom = "2.1.0"
-dokka = "2.1.0-Beta"
-indra = "3.2.0"
-ktlint = "13.1.0"
-shadow = "9.1.0"
+blossom = "2.2.0"
+dokka = "2.1.0"
+indra = "4.0.0"
+ktlint = "14.0.1"
+shadow = "9.3.1"
 
 [libraries]
 # Kotlin
